@@ -1,13 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
         <title>{% block title %}BeerSocialClub{% endblock %}</title>
+
+        <link rel="stylesheet" href="{{ asset('libs/bootstrap/dist/css/bootstrap.min.css') }}">
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}
+
+        <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('libs/tether/dist/js/tether.min.js') }}"></script>
+        <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
