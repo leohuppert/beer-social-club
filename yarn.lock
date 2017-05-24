@@ -13,6 +13,10 @@ jquery@>=1.9.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
+lib@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/lib/-/lib-3.0.0.tgz#6b6fe8173db54a97aedc2555335eb7267600d278"
+
 tether@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/tether/-/tether-1.4.0.tgz#0f9fa171f75bf58485d8149e94799d7ae74d1c1a"
