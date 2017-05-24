@@ -1,28 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Beertypes list</h1>
+    <h1>Beers list</h1>
 
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Degree</th>
+                <th>Brewer</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for beerType in beerTypes %}
+        {% for beer in beers %}
             <tr>
-                <td><a href="{{ path('beertype_show', { 'id': beerType.id }) }}">{{ beerType.id }}</a></td>
-                <td>{{ beerType.name }}</td>
+                <td><a href="{{ path('beer_show', { 'id': beer.id }) }}">{{ beer.id }}</a></td>
+                <td>{{ beer.name }}</td>
+                <td>{{ beer.degree }}</td>
+                <td>{{ beer.brewer }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('beertype_show', { 'id': beerType.id }) }}">show</a>
+                            <a href="{{ path('beer_show', { 'id': beer.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('beertype_edit', { 'id': beerType.id }) }}">edit</a>
+                            <a href="{{ path('beer_edit', { 'id': beer.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -33,7 +37,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('beertype_new') }}">Create a new beerType</a>
+            <a href="{{ path('beer_new') }}">Create a new beer</a>
         </li>
     </ul>
 {% endblock %}
