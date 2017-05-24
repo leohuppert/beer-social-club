@@ -1,0 +1,11 @@
+{
+  "name": "BeerSocialClub",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:leohuppert/beer-social-club.git",
+  "author": "Léo Huppert <leo.huppert57@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6"
+  }
+}
