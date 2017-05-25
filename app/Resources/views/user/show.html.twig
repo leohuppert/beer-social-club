@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>{{ user }}</h1>
+
+    <h3>Ratings</h3>
+
+    {% if user.ratings | length > 0 %}
+        {% for rating in user.ratings %}
+            <div class="card">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <h4 class="card-title"><a href="{{ path('beer_show', { id: rating.beer.id }) }}">{{ rating.beer }}</a></h4>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ rating.date | date }}</h6>
+                            <p class="card-text">
+                                <i class="fa fa-star" aria-hidden="true"></i>&nbsp;<b>{{ rating.rating }} / 5.0</b> <br>
+                                {{ rating.comment }}
+                            </p>
+                            {% if rating.author == app.user %}
+                                <a href="{{ path('rate_update', { id: rating.id }) }}" class="btn btn-sm btn-warning card-link">Edit</a>
+                            {% endif %}
+                        </div>
+                        <div class="col-lg-2">
+                            <a href="{{ path('beer_show', { id: rating.beer.id }) }}">
+                                <img src="{{ asset('uploads/pictures/' ~ rating.beer.picture) }}" width="100" height="auto">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

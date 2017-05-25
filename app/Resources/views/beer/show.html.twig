@@ -37,21 +37,32 @@
             <br><br>
 
             <h4>See what they say about {{ beer }}</h4>
-            {% for rating in beer_ratings %}
-                <div class="card">
-                    <div class="card-block">
-                        <h4 class="card-title"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;{{ rating.author }}</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ rating.date | date }}</h6>
-                        <p class="card-text">
-                            <i class="fa fa-star" aria-hidden="true"></i>&nbsp;<b>{{ rating.rating }} / 5.0</b> <br>
-                            {{ rating.comment }}
-                        </p>
-                        {% if rating.author == app.user %}
-                            <a href="{{ path('rate_update', { id: rating.id }) }}" class="btn btn-sm btn-warning card-link">Edit !</a>
-                        {% endif %}
+            {% if beer_ratings | length > 0 %}
+                {% for rating in beer_ratings %}
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                <a href="{{ path('user_show', { id: rating.author.id }) }}">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;{{ rating.author }}
+                                </a>
+                            </h4>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ rating.date | date }}</h6>
+                            <p class="card-text">
+                                <i class="fa fa-star" aria-hidden="true"></i>&nbsp;<b>{{ rating.rating }} / 5.0</b> <br>
+                                {{ rating.comment }}
+                            </p>
+                            {% if rating.author == app.user %}
+                                <a href="{{ path('rate_update', { id: rating.id }) }}" class="btn btn-sm btn-warning card-link">Edit !</a>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <p>
+                    No comment posted yet
+                </p>
+            {% endif %}
+
 
             <br>
             <a href="{{ path('beer_index') }}" class="btn btn-sm btn-secondary">Back to the list</a>
