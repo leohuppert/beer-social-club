@@ -28,7 +28,16 @@
         </tbody>
     </table>
 
-    <a href="{{ path('beer_rate', { id: beer.id }) }}" class="btn btn-primary">Rate that beer!</a>
+    {% if not is_rated %}
+        <a href="{{ path('beer_rate', { id: beer.id }) }}" class="btn btn-primary">Rate that beer!</a>
+    {% else %}
+        <p>
+            My rating : <br>
+            {{ liking.rating }}/5.0 <br>
+            {{ liking.comment }}
+        </p>
+        <a href="{{ path('beer_rate', { id: beer.id }) }}" class="btn btn-primary">Edit my rating</a>
+    {% endif %}
 
     <ul>
         <li>

@@ -26,7 +26,7 @@ class LikingController extends Controller
             $em = $this->getDoctrine()
                 ->getManager();
 
-            $liking->setUser($this->getUser());
+            $liking->setAuthor($this->getUser());
             $liking->setBeer($beer);
 
             $em->persist($liking);

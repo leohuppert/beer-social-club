@@ -67,9 +67,28 @@ class BeerController extends Controller
     {
         $deleteForm = $this->createDeleteForm($beer);
 
+        $em = $this->getDoctrine()
+            ->getManager();
+
+        $ratedBeersByUser = $em->getRepository('AppBundle:Liking')
+            ->getRatedBeers($this->getUser());
+
+        $isRated = false;
+        $liking = null;
+
+        foreach($ratedBeersByUser as $rating) {
+            if($rating->getBeer() == $beer) {
+                $isRated = true;
+                $liking = $rating;
+                break;
+            }
+        }
+
         return $this->render('beer/show.html.twig', array(
-            'beer' => $beer,
+            'beer'        => $beer,
             'delete_form' => $deleteForm->createView(),
+            'is_rated'    => $isRated,
+            'liking'      => $liking,
         ));
     }
 

@@ -41,7 +41,7 @@ class Liking
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="ratings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private $author;
 
     /**
      * @var Beer
@@ -112,17 +112,17 @@ class Liking
     /**
      * @return User
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 
     /**
-     * @param User $user
+     * @param User $author
      */
-    public function setUser(User $user)
+    public function setAuthor(User $author)
     {
-        $this->user = $user;
+        $this->author = $author;
     }
 
     /**

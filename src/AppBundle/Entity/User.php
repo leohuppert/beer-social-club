@@ -54,7 +54,7 @@ class User implements UserInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Liking", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Liking", mappedBy="author")
      */
     private $ratings;
 

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\User;
+
 /**
  * LikingRepository
  *
@@ -10,4 +12,12 @@ namespace AppBundle\Repository;
  */
 class LikingRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getRatedBeers(User $user)
+    {
+        return $this->createQueryBuilder('l')
+            ->where('l.author = :userId')
+            ->setParameter('userId', $user->getId())
+            ->getQuery()
+            ->getResult();
+    }
 }
