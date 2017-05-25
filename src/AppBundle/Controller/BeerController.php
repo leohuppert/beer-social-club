@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Beer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Beer controller.
@@ -44,7 +46,21 @@ class BeerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()
+                ->getManager();
+
+            //Handling picture
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $beer->getFile();
+            if($file instanceof UploadedFile) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('pictures_directory'),
+                    $fileName
+                );
+                $beer->setPicture($fileName);
+            }
+
             $em->persist($beer);
             $em->flush();
 
@@ -72,6 +88,8 @@ class BeerController extends Controller
 
         $ratedBeersByUser = $em->getRepository('AppBundle:Liking')
             ->getRatedBeers($this->getUser());
+        $beerRatings = $em->getRepository('AppBundle:Liking')
+            ->getBeerRatings($beer);
 
         $isRated = false;
         $liking = null;
@@ -85,10 +103,11 @@ class BeerController extends Controller
         }
 
         return $this->render('beer/show.html.twig', array(
-            'beer'        => $beer,
-            'delete_form' => $deleteForm->createView(),
-            'is_rated'    => $isRated,
-            'liking'      => $liking,
+            'beer'         => $beer,
+            'delete_form'  => $deleteForm->createView(),
+            'is_rated'     => $isRated,
+            'liking'       => $liking,
+            'beer_ratings' => $beerRatings,
         ));
     }
 

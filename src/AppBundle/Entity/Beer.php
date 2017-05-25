@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Beer
@@ -49,6 +51,19 @@ class Beer
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
     private $type;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $picture;
+
+    /**
+     * @var UploadedFile
+     *
+     * @Assert\NotBlank(message="Please, upload the picture of the beer")
+     * @Assert\File(mimeTypes={"image/png", "image/jpeg"})
+     */
+    private $file;
 
     /**
      * Get id
@@ -148,8 +163,37 @@ class Beer
         $this->type = $type;
     }
 
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param string $picture
+     */
+    public function setPicture(string $picture)
+    {
+        $this->picture = $picture;
+    }
+
     function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file)
+    {
+        $this->file = $file;
     }
 }

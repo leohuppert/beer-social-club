@@ -6,7 +6,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>Degree</th>
                 <th>Brewer</th>
@@ -17,8 +16,10 @@
         <tbody>
         {% for beer in beers %}
             <tr>
-                <td><a href="{{ path('beer_show', { 'id': beer.id }) }}">{{ beer.id }}</a></td>
-                <td>{{ beer.name }}</td>
+                <td>
+                    <img src="{{ asset('uploads/pictures/' ~ beer.picture) }}" height="100" width="auto">
+                    <a href="{{ path('beer_show', { 'id': beer.id }) }}">{{ beer.name }}</a>
+                </td>
                 <td>{{ beer.degree }}</td>
                 <td>{{ beer.brewer }}</td>
                 <td>{{ beer.type }}</td>
@@ -37,9 +38,6 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('beer_new') }}">Create a new beer</a>
-        </li>
-    </ul>
+    <a href="{{ path('beer_new') }}" class="btn btn-primary">Create a new beer</a>
+
 {% endblock %}
