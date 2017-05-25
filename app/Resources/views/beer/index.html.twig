@@ -10,7 +10,6 @@
                 <th>Degree</th>
                 <th>Brewer</th>
                 <th>Type</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -26,16 +25,6 @@
                 <td>{{ beer.degree }}</td>
                 <td>{{ beer.brewer }}</td>
                 <td>{{ beer.type }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('beer_show', { 'id': beer.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('beer_edit', { 'id': beer.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
             </tr>
         {% endfor %}
         </tbody>
