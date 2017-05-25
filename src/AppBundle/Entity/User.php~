@@ -58,13 +58,6 @@ class User implements UserInterface
      */
     private $ratings;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->ratings = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -211,38 +204,5 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
-
-    /**
-     * Add rating
-     *
-     * @param \AppBundle\Entity\Liking $rating
-     *
-     * @return User
-     */
-    public function addRating(\AppBundle\Entity\Liking $rating)
-    {
-        $this->ratings[] = $rating;
-
-        return $this;
-    }
-
-    /**
-     * Remove rating
-     *
-     * @param \AppBundle\Entity\Liking $rating
-     */
-    public function removeRating(\AppBundle\Entity\Liking $rating)
-    {
-        $this->ratings->removeElement($rating);
-    }
-
-    /**
-     * Get ratings
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRatings()
-    {
-        return $this->ratings;
-    }
 }
+

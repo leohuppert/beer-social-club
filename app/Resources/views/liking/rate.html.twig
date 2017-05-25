@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>Rate {{ beer }}</h2>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-primary" value="Rate">
+    {{ form_end(form) }}
+
+{% endblock %}
