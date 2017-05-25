@@ -36,7 +36,7 @@
             {{ liking.rating }}/5.0 <br>
             {{ liking.comment }}
         </p>
-        <a href="{{ path('beer_rate', { id: beer.id }) }}" class="btn btn-primary">Edit my rating</a>
+        <a href="{{ path('rate_update', { id: liking.id }) }}" class="btn btn-primary">Edit my rating</a>
     {% endif %}
 
     <ul>

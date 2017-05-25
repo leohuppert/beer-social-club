@@ -52,6 +52,13 @@ class Liking
     private $beer;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetimetz")
+     */
+    private $date;
+
+    /**
      * Get id
      *
      * @return int
@@ -139,5 +146,21 @@ class Liking
     public function setBeer(Beer $beer)
     {
         $this->beer = $beer;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate(): \DateTime
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate(\DateTime $date)
+    {
+        $this->date = $date;
     }
 }

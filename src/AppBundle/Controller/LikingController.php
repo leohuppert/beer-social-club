@@ -12,9 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 class LikingController extends Controller
 {
     /**
+     * @Route("/beer/rate/{id}", name="beer_rate")
      * @param Request $request
-     *
-     * @Route("/rate/{id}", name="beer_rate")
+     * @param Beer $beer
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request, Beer $beer)
     {
@@ -28,6 +29,7 @@ class LikingController extends Controller
 
             $liking->setAuthor($this->getUser());
             $liking->setBeer($beer);
+            $liking->setDate(new \DateTime());
 
             $em->persist($liking);
             $em->flush();
@@ -38,6 +40,34 @@ class LikingController extends Controller
         return $this->render(':liking:rate.html.twig', array(
             'form' => $form->createView(),
             'beer' => $beer,
+        ));
+    }
+
+    /**
+     * @Route("/beer/update-rating/{id}", name="rate_update")
+     * @param Request $request
+     * @param Liking $liking
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction(Request $request, Liking $liking)
+    {
+        $editForm = $this->createForm(LikingType::class, $liking);
+        $editForm->handleRequest($request);
+
+        if($editForm->isSubmitted() && $editForm->isValid()) {
+            $liking->setDate(new \DateTime());
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('beer_show', array(
+                'id' => $liking->getBeer()->getId(),
+            ));
+        }
+
+        return $this->render(':liking:rate.html.twig', array(
+            'form'   => $editForm->createView(),
+            'beer'   => $liking->getBeer(),
+            'liking' => $liking,
         ));
     }
 }
