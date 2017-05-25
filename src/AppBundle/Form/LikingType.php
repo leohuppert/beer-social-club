@@ -14,7 +14,9 @@ class LikingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rating')
+            ->add('rating', null, array(
+                'label' => 'Rate the beer on /5',
+            ))
             ->add('comment');
     }
 

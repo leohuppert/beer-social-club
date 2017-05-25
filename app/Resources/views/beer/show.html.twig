@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Beer</h1>
+
 
     <div class="row">
         <div class="col-lg-8">
+            <h1>Beer</h1>
+
             <table class="table table-striped">
                 <tbody>
                 <tr>
@@ -33,11 +35,6 @@
             {% if not is_rated %}
                 <a href="{{ path('beer_rate', { id: beer.id }) }}" class="btn btn-primary">Rate that beer!</a>
             {% else %}
-                {#<p>
-                    My rating : <br>
-                    {{ liking.rating }}/5.0 <br>
-                    {{ liking.comment }}
-                </p>#}
                 <a href="{{ path('rate_update', { id: liking.id }) }}" class="btn btn-primary">Edit my rating</a>
             {% endif %}
 
@@ -47,9 +44,12 @@
             {% for rating in beer_ratings %}
                 <div class="card">
                     <div class="card-block">
-                        <h4 class="card-title">{{ rating.author }}</h4>
+                        <h4 class="card-title"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;{{ rating.author }}</h4>
                         <h6 class="card-subtitle mb-2 text-muted">{{ rating.date | date }}</h6>
-                        <p class="card-text">{{ rating.comment }}</p>
+                        <p class="card-text">
+                            <i class="fa fa-star" aria-hidden="true"></i>&nbsp;<b>{{ rating.rating }} / 5.0</b> <br>
+                            {{ rating.comment }}
+                        </p>
                         {% if rating.author == app.user %}
                             <a href="{{ path('rate_update', { id: rating.id }) }}" class="btn btn-sm btn-warning card-link">Edit !</a>
                         {% endif %}
@@ -57,9 +57,8 @@
                 </div>
             {% endfor %}
 
-            <br><br>
-
-            <ul>
+            <br>
+            {#<ul>
                 <li>
                     <a href="{{ path('beer_index') }}">Back to the list</a>
                 </li>
@@ -71,7 +70,10 @@
                     <input type="submit" value="Delete">
                     {{ form_end(delete_form) }}
                 </li>
-            </ul>
+            </ul>#}
+
+            <a href="{{ path('beer_index') }}" class="btn btn-sm btn-secondary">Back to the list</a>
+
         </div>
         <div class="col-lg-4">
             <img src="{{ asset('uploads/pictures/' ~ beer.picture) }}" width="300" height="auto">

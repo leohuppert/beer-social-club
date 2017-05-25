@@ -6,6 +6,7 @@
   "author": "Léo Huppert <leo.huppert57@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "bootstrap": "4.0.0-alpha.6"
+    "bootstrap": "4.0.0-alpha.6",
+    "font-awesome": "^4.7.0"
   }
 }

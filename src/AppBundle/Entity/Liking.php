@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Liking
@@ -25,6 +26,7 @@ class Liking
      * @var string
      *
      * @ORM\Column(name="rating", type="decimal", precision=5, scale=1)
+     * @Assert\LessThanOrEqual(value="5")
      */
     private $rating;
 

@@ -17,8 +17,11 @@
         {% for beer in beers %}
             <tr>
                 <td>
-                    <img src="{{ asset('uploads/pictures/' ~ beer.picture) }}" height="100" width="auto">
-                    <a href="{{ path('beer_show', { 'id': beer.id }) }}">{{ beer.name }}</a>
+
+                    <a href="{{ path('beer_show', { 'id': beer.id }) }}">
+                        <img src="{{ asset('uploads/pictures/' ~ beer.picture) }}" height="100" width="auto">
+                        {{ beer.name }}
+                    </a>
                 </td>
                 <td>{{ beer.degree }}</td>
                 <td>{{ beer.brewer }}</td>
@@ -38,6 +41,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('beer_new') }}" class="btn btn-primary">Create a new beer</a>
+    <a href="{{ path('beer_new') }}" class="btn btn-primary">Add a beer</a>
 
 {% endblock %}

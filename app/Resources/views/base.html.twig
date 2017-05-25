@@ -7,6 +7,7 @@
         <title>{% block title %}BeerSocialClub{% endblock %}</title>
 
         <link rel="stylesheet" href="{{ asset('libs/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('libs/font-awesome/css/font-awesome.min.css') }}">
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
@@ -26,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link {% if app.request.get('_route') starts with 'beer' %}active{% endif %}" href="{{ path('beer_index') }}">Beers</a>
+                    <a class="nav-link {% if app.request.get('_route') starts with 'beer' %}active{% endif %}" href="{{ path('beer_index') }}"><i class="fa fa-beer" aria-hidden="true"></i>&nbsp;Beers</a>
                 </li>
             </ul>
         </div>
